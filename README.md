@@ -1,1 +1,1 @@
- Um programa em linguagem C para simular uma agenda de telefones. Sendo apenas permitido gravar o dado de seis pessoas até o momento.
+ Um programa em linguagem C para simular uma agenda de telefones. Sendo apenas permitido gravar os dados de seis pessoas até o momento.

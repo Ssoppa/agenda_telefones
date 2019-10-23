@@ -37,7 +37,15 @@ struct pessoa {
 };
 
 int main() {
-	struct pessoa humanos[6];
+	int qtd_pessoas = 6, i;
+	struct pessoa agenda[6];
+	for (i = 0; i < qtd_pessoas, i++) {
+		printf("Olá, sou sua agenda telefônica. Por favor, insira os dados requisitados.\n");
+		printf("Digite seu nome: ");
+		gets(agenda[i].nome);
+		printf("Digite seu email: ");
+		gets(agenda[i].email);
+	}
 	printf("Hello there, my name is Supper Soppa");
 	return 0;
 }
