@@ -36,15 +36,53 @@ struct pessoa {
 	struct nascimento data;
 };
 
+int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas);
+
+int imprime_tudo(struct pessoa *agenda, int pessoas_existentes);
+
 int main() {
-	int qtd_pessoas = 6, i, variavel_menu;
+	int qtd_pessoas, i, variavel_menu = 1, pessoas_existentes = 0;
 	struct pessoa agenda[6];
 
-	//criar as opcoes de menu de acordo com a variavel_menu
-	printf("Olá, sou sua agenda telefônica. O que gostaria de fazer? Digite a opção desejada\n[1] - Inserir pessoas por ordem alfábetica\n[2] - Retirar uma pessoa\n[3] - Mostrar todos os nomes, telefones e emails\n[4] - Mostrar todos os dados dispóniveis\n[5] - Buscar com o primeiro nome\n[6] - Buscar por mês de aniversário\n[7] - Buscar por dia e mês de aniversário\n");
-	scanf("%d", &variavel_menu);
 
-	//insere pessoas, criar funcao para cada opcao do menu?
+	while (variavel_menu > 0){
+		printf("\nOlá, sou sua agenda telefônica. O que gostaria de fazer? Digite a opção desejada\n[1] - Inserir pessoas por ordem alfábetica\n[2] - Retirar uma pessoa\n[3] - Mostrar todos os nomes, telefones e emails\n[4] - Mostrar todos os dados disponíveis\n[5] - Buscar com o primeiro nome\n[6] - Buscar por mês de aniversário\n[7] - Buscar por dia e mês de aniversário\n[0] - Fechar a agenda\n");
+		scanf("%d", &variavel_menu);
+
+		if (variavel_menu == 1) {
+			printf("Quantas pessoas gostaria de adicionar?\n");
+			scanf("%d", &qtd_pessoas);
+			pessoas_existentes += qtd_pessoas;
+			inserir_pessoas(&agenda[6], qtd_pessoas);
+		}
+		else if (variavel_menu == 2) {
+			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		}
+		else if (variavel_menu == 3) {
+			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		}
+		else if (variavel_menu == 4) {
+			imprime_tudo(&agenda[6], pessoas_existentes);
+		}
+		else if (variavel_menu == 5) {
+			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		}
+		else if (variavel_menu == 6) {
+			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		}
+		else if (variavel_menu == 7) {
+			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		}
+	}
+	
+	printf("Hello there, my name is Supper Soppa");
+	return 0;
+}
+
+int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) {
+	int i, aux;
+	char auxc[40];
+
 	for (i = 0; i < qtd_pessoas; i++) {
 
 		printf("Por favor, insira os dados requisitados.\n");
@@ -94,7 +132,27 @@ int main() {
 		printf("Tem alguma observação? Pode escrever alguma coisa: ");
 		scanf("\n%[A-Z a-z]s", agenda[i].comentario);
 		fflush(stdin);
-	}
-	printf("Hello there, my name is Supper Soppa");
-	return 0;
+  }
+
+  return 0;
+}
+
+int imprime_tudo(struct pessoa *agenda, int pessoas_existentes) {
+	int i;
+
+	for (i = 0; i < pessoas_existentes; i++) {
+		printf("Nome: %s\n",agenda[i].nome);
+
+		printf("Email: %s\n", agenda[i].email);
+
+		printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
+
+		printf("Numero telefônico: +%d%d%d\n", agenda[i].tel.cod_inter, agenda[i].tel.cod_area, agenda[i].tel.numero);
+
+		printf("Data de nascimento: %d/%d/%d\n", agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano);
+
+		printf("Observação: %s\n\n\n", agenda[i].comentario);
+  }
+  
+  return 0;
 }
