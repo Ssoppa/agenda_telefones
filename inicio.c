@@ -90,11 +90,11 @@ int main()
 		}
 		else if (variavel_menu == 6) 
 		{
-			acha_niver(struct pessoa *agenda, int pessoas_existentes);
+			acha_niver(&agenda[6], pessoas_existentes);
 		}
 		else if (variavel_menu == 7) 
 		{
-			acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
+			acha_niverdia(&agenda[6], pessoas_existentes);
 		}
 	}
 	
@@ -226,7 +226,7 @@ int acha_pessoa(struct pessoa *agenda, int pessoas_existentes)
   return 0;
 }
 
-int acha_niver(struct pessoa *agenda, int pessoas_existentes)
+int acha_niver(&agenda[6], pessoas_existentes)
 {
 	int mes, i;
 
@@ -248,7 +248,7 @@ int acha_niver(struct pessoa *agenda, int pessoas_existentes)
 }
 
 
-int acha_niverdia(struct pessoa *agenda, int pessoas_existentes)
+int acha_niverdia(&agenda[6], pessoas_existentes)
 {
 	int mes, dia, i;
 
