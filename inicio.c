@@ -1,5 +1,5 @@
 //Matheus Soppa Geremias
-//Andrézinho
+//André de Campos
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,6 +45,11 @@ int imprime_um_pouco(struct pessoa *agenda, int pessoas_existentes);
 
 int acha_pessoa(struct pessoa *agenda, int pessoas_existentes);
 
+int acha_niver(struct pessoa *agenda, int pessoas_existentes);
+
+int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
+
+
 int main() {
 	int qtd_pessoas, i, variavel_menu = 1, pessoas_existentes = 0;
 	struct pessoa agenda[6];
@@ -73,10 +78,10 @@ int main() {
 			acha_pessoa(&agenda[6], pessoas_existentes);
 		}
 		else if (variavel_menu == 6) {
-			printf("\nCalma, ainda estamos implementando essa função :D\n");
+			acha_niver(struct pessoa *agenda, int pessoas_existentes);
 		}
 		else if (variavel_menu == 7) {
-			printf("\nCalma, ainda estamos implementando essa função :D\n");
+			acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
 		}
 	}
 	
@@ -197,4 +202,51 @@ int acha_pessoa(struct pessoa *agenda, int pessoas_existentes){
 		}
 	}
   return 0;
+}
+
+int acha_niver(struct pessoa *agenda, int pessoas_existentes)
+{
+	int mes, i;
+
+	printf("Qual mes de aniversario de quem quer encontrar?");
+	scanf("\n%d", &mes);
+
+	for (i = 0; i < pessoas_existentes; i++) 
+    {
+		if (agenda[i].data.mes==mes) 
+		{
+			printf("\nOs dados encontrados dessa pessoa são:\n");
+			printf("Nome: %s\n", agenda[i].nome);
+			printf("Email: %s\n", agenda[i].email);
+			printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
+			printf("Numero telefônico: +%d%d%d\n", agenda[i].tel.cod_inter, agenda[i].tel.cod_area, agenda[i].tel.numero);
+		}
+	}
+    return 0;
+}
+
+
+int acha_niverdia(struct pessoa *agenda, int pessoas_existentes)
+{
+	int mes, dia, i;
+
+	printf("Qual o dia e o mes de aniversario de quem quer encontrar?\nDigite no padrao dia mes(00 00)");
+	scanf("\n%d%d",&dia, &mes);
+
+	for (i = 0; i < pessoas_existentes; i++) 
+    {
+		if (agenda[i].data.mes==mes) 
+		{
+			if (agenda[i].data.dia==dia)
+			{
+				printf("\nOs dados encontrados dessa pessoa são:\n");
+				printf("Nome: %s\n", agenda[i].nome);
+				printf("Email: %s\n", agenda[i].email);
+				printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
+				printf("Numero telefônico: +%d%d%d\n", agenda[i].tel.cod_inter, agenda[i].tel.cod_area, agenda[i].tel.numero);
+			}
+		}
+			
+	}
+    return 0;
 }
