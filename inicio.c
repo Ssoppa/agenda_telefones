@@ -1,11 +1,12 @@
 //Matheus Soppa Geremias
-//Andrézinho
+//André de Campos
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-struct endereco {
+struct endereco 
+{
 	int numero;
 	char complemento[40];
 	int cep;
@@ -16,19 +17,22 @@ struct endereco {
 	char pais[40];
 };
 
-struct telefone {
+struct telefone 
+{
 	int cod_inter;
 	int cod_area;
 	int numero;
 };
 
-struct nascimento {
+struct nascimento 
+{
 	int dia;
 	int mes;
 	int ano;
 };
 
-struct pessoa {
+struct pessoa 
+{
 	char nome[40];
 	char email[40];
 	char comentario[40];
@@ -45,38 +49,52 @@ int imprime_um_pouco(struct pessoa *agenda, int pessoas_existentes);
 
 int acha_pessoa(struct pessoa *agenda, int pessoas_existentes);
 
-int main() {
+int acha_niver(struct pessoa *agenda, int pessoas_existentes);
+
+int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
+
+
+int main() 
+{
 	int qtd_pessoas, i, variavel_menu = 1, pessoas_existentes = 0;
 	struct pessoa agenda[6];
 
 
-	while (variavel_menu > 0){
+	while (variavel_menu > 0)
+	{
 		printf("\nOlá, sou sua agenda telefônica. O que gostaria de fazer? Digite a opção desejada\n[1] - Inserir pessoas por ordem alfábetica\n[2] - Retirar uma pessoa\n[3] - Mostrar todos os nomes, telefones e emails\n[4] - Mostrar todos os dados disponíveis\n[5] - Buscar com o primeiro nome\n[6] - Buscar por mês de aniversário\n[7] - Buscar por dia e mês de aniversário\n[0] - Fechar a agenda\n");
 		scanf("%d", &variavel_menu);
 
-		if (variavel_menu == 1) {
+		if (variavel_menu == 1) 
+		{
 			printf("Quantas pessoas gostaria de adicionar?\n");
 			scanf("%d", &qtd_pessoas);
 			pessoas_existentes += qtd_pessoas;
 			inserir_pessoas(&agenda[6], qtd_pessoas);
 		}
-		else if (variavel_menu == 2) {
+		else if (variavel_menu == 2) 
+		{
 			printf("\nCalma, ainda estamos implementando essa função :D\n");
 		}
-		else if (variavel_menu == 3) {
+		else if (variavel_menu == 3) 
+		{
 			imprime_um_pouco(&agenda[6], pessoas_existentes);
 		}
-		else if (variavel_menu == 4) {
+		else if (variavel_menu == 4) 
+		{
 			imprime_tudo(&agenda[6], pessoas_existentes);
 		}
-		else if (variavel_menu == 5) {
+		else if (variavel_menu == 5) 
+		{
 			acha_pessoa(&agenda[6], pessoas_existentes);
 		}
-		else if (variavel_menu == 6) {
-			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		else if (variavel_menu == 6) 
+		{
+			acha_niver(&agenda[6], pessoas_existentes);
 		}
-		else if (variavel_menu == 7) {
-			printf("\nCalma, ainda estamos implementando essa função :D\n");
+		else if (variavel_menu == 7) 
+		{
+			acha_niverdia(&agenda[6], pessoas_existentes);
 		}
 	}
 	
@@ -84,11 +102,13 @@ int main() {
 	return 0;
 }
 
-int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) {
+int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) 
+{
 	int i, aux;
 	char auxc[40];
 
-	for (i = 0; i < qtd_pessoas; i++) {
+	for (i = 0; i < qtd_pessoas; i++) 
+	{
 
 		printf("Por favor, insira os dados requisitados.\n");
 
@@ -99,7 +119,7 @@ int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) {
 		fflush(stdin);
 
 		printf("Digite seu email: ");
-		scanf("\n%[A-Z a-z]s", agenda[i].email);
+		scanf("\n%[A-Z a-z @ .]s", agenda[i].email);
 		fflush(stdin);
 
 		printf("Digite seu endereco na seguinte ordem: Rua, número, bairro, cidade, CEP, estado, país e complemento, como no exemplo a seguir:\n Rua Xablau \n691 \nVila Sesámo \nGothan \n12345678 \nTatooine \nNova Zelândia \nCasa:\n");
@@ -144,10 +164,12 @@ int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) {
   return 0;
 }
 
-int imprime_tudo(struct pessoa *agenda, int pessoas_existentes) {
+int imprime_tudo(struct pessoa *agenda, int pessoas_existentes) 
+{
 	int i;
 
-	for (i = 0; i < pessoas_existentes; i++) {
+	for (i = 0; i < pessoas_existentes; i++) 
+	{
 		printf("Nome: %s\n",agenda[i].nome);
 
 		printf("Email: %s\n", agenda[i].email);
@@ -164,10 +186,12 @@ int imprime_tudo(struct pessoa *agenda, int pessoas_existentes) {
   return 0;
 }
 
-int imprime_um_pouco(struct pessoa *agenda, int pessoas_existentes) {
+int imprime_um_pouco(struct pessoa *agenda, int pessoas_existentes) 
+{
 	int i;
 
-	for (i = 0; i < pessoas_existentes; i++) {
+	for (i = 0; i < pessoas_existentes; i++) 
+	{
 		printf("Nome: %s\n",agenda[i].nome);
 
 		printf("Email: %s\n", agenda[i].email);
@@ -178,17 +202,21 @@ int imprime_um_pouco(struct pessoa *agenda, int pessoas_existentes) {
   return 0;
 }
 
-int acha_pessoa(struct pessoa *agenda, int pessoas_existentes){
+int acha_pessoa(struct pessoa *agenda, int pessoas_existentes)
+{
 
-	int i;
+	int i, tamanho;
 	char nome[40];
 
 	printf("Quem você gostaria de encontrar?");
 	scanf("\n%[A-Z a-z]s", nome);
+	tamanho = strlen(nome);
 
-	for (i = 0; i < pessoas_existentes; i++) {
+	for (i = 0; i < pessoas_existentes; i++) 
+	{
 
-		if (strcmp(nome,agenda[i].nome) == 0) {
+		if (strncmp(nome,agenda[i].nome, tamanho) == 0) 
+		{
 			printf("\nOs dados encontrados dessa pessoa são:\n");
 			printf("Email: %s\n", agenda[i].email);
 			printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
@@ -197,4 +225,51 @@ int acha_pessoa(struct pessoa *agenda, int pessoas_existentes){
 		}
 	}
   return 0;
+}
+
+int acha_niver(struct pessoa *agenda, int pessoas_existentes)
+{
+	int mes, i;
+
+	printf("Qual mes de aniversario de quem quer encontrar?");
+	scanf("\n%d", &mes);
+
+	for (i = 0; i < pessoas_existentes; i++) 
+    {
+		if (agenda[i].data.mes==mes) 
+		{
+			printf("\nOs dados encontrados dessa pessoa são:\n");
+			printf("Nome: %s\n", agenda[i].nome);
+			printf("Email: %s\n", agenda[i].email);
+			printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
+			printf("Numero telefônico: +%d%d%d\n", agenda[i].tel.cod_inter, agenda[i].tel.cod_area, agenda[i].tel.numero);
+		}
+	}
+    return 0;
+}
+
+
+int acha_niverdia(struct pessoa *agenda, int pessoas_existentes)
+{
+	int mes, dia, i;
+
+	printf("Qual o dia e o mes de aniversario de quem quer encontrar?\nDigite no padrao dia mes(00 00)");
+	scanf("\n%d%d",&dia, &mes);
+
+	for (i = 0; i < pessoas_existentes; i++) 
+    {
+		if (agenda[i].data.mes==mes) 
+		{
+			if (agenda[i].data.dia==dia)
+			{
+				printf("\nOs dados encontrados dessa pessoa são:\n");
+				printf("Nome: %s\n", agenda[i].nome);
+				printf("Email: %s\n", agenda[i].email);
+				printf("Endereço: %s, %d, %s, %s, %d - %s, %s - %s\n", agenda[i].ender.rua, agenda[i].ender.numero, agenda[i].ender.bairro, agenda[i].ender.cidade, agenda[i].ender.cep, agenda[i].ender.estado, agenda[i].ender.pais, agenda[i].ender.complemento);
+				printf("Numero telefônico: +%d%d%d\n", agenda[i].tel.cod_inter, agenda[i].tel.cod_area, agenda[i].tel.numero);
+			}
+		}
+			
+	}
+    return 0;
 }
