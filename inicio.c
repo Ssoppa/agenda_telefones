@@ -5,16 +5,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX 100
+
 struct endereco 
 {
 	int numero;
-	char complemento[40];
+	char complemento[100];
 	int cep;
-	char rua[40];
-	char bairro[40];
-	char cidade[40];
-	char estado[40];
-	char pais[40];
+	char rua[100];
+	char bairro[100];
+	char cidade[100];
+	char estado[100];
+	char pais[100];
 };
 
 struct telefone 
@@ -33,15 +35,15 @@ struct nascimento
 
 struct pessoa 
 {
-	char nome[40];
-	char email[40];
-	char comentario[40];
+	char nome[100];
+	char email[100];
+	char comentario[256];
 	struct endereco ender;
 	struct telefone tel;
 	struct nascimento data;
 };
 
-int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas);
+int inserir_pessoas(struct pessoa *agenda, int pessoas_existentes, int qtd_pessoas);
 
 int imprime_tudo(struct pessoa *agenda, int pessoas_existentes);
 
@@ -57,7 +59,7 @@ int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
 int main() 
 {
 	int qtd_pessoas, i, variavel_menu = 1, pessoas_existentes = 0;
-	struct pessoa agenda[6];
+	struct pessoa agenda[MAX];
 
 
 	while (variavel_menu > 0)
@@ -69,8 +71,9 @@ int main()
 		{
 			printf("Quantas pessoas gostaria de adicionar?\n");
 			scanf("%d", &qtd_pessoas);
+			inserir_pessoas(&agenda[MAX], pessoas_existentes, qtd_pessoas);
 			pessoas_existentes += qtd_pessoas;
-			inserir_pessoas(&agenda[6], qtd_pessoas);
+			
 		}
 		else if (variavel_menu == 2) 
 		{
@@ -78,23 +81,23 @@ int main()
 		}
 		else if (variavel_menu == 3) 
 		{
-			imprime_um_pouco(&agenda[6], pessoas_existentes);
+			imprime_um_pouco(&agenda[MAX], pessoas_existentes);
 		}
 		else if (variavel_menu == 4) 
 		{
-			imprime_tudo(&agenda[6], pessoas_existentes);
+			imprime_tudo(&agenda[MAX], pessoas_existentes);
 		}
 		else if (variavel_menu == 5) 
 		{
-			acha_pessoa(&agenda[6], pessoas_existentes);
+			acha_pessoa(&agenda[MAX], pessoas_existentes);
 		}
 		else if (variavel_menu == 6) 
 		{
-			acha_niver(&agenda[6], pessoas_existentes);
+			acha_niver(&agenda[MAX], pessoas_existentes);
 		}
 		else if (variavel_menu == 7) 
 		{
-			acha_niverdia(&agenda[6], pessoas_existentes);
+			acha_niverdia(&agenda[MAX], pessoas_existentes);
 		}
 	}
 	
@@ -102,12 +105,12 @@ int main()
 	return 0;
 }
 
-int inserir_pessoas(struct pessoa *agenda, int qtd_pessoas) 
+int inserir_pessoas(struct pessoa *agenda, int pessoas_existentes, int qtd_pessoas) 
 {
 	int i, aux;
-	char auxc[40];
+	char auxc[100];
 
-	for (i = 0; i < qtd_pessoas; i++) 
+	for (i = pessoas_existentes, aux = 0; aux < qtd_pessoas; i++, aux++) 
 	{
 
 		printf("Por favor, insira os dados requisitados.\n");
@@ -206,7 +209,7 @@ int acha_pessoa(struct pessoa *agenda, int pessoas_existentes)
 {
 
 	int i, tamanho;
-	char nome[40];
+	char nome[100];
 
 	printf("Quem você gostaria de encontrar?");
 	scanf("\n%[A-Z a-z]s", nome);
