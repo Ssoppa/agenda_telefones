@@ -59,7 +59,9 @@ int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
 int main() 
 {
 	int qtd_pessoas, i, variavel_menu = 1, pessoas_existentes = 0;
-	struct pessoa agenda[MAX];
+	struct pessoa *agenda;
+
+	agenda = (struct pessoa*) malloc (MAX * sizeof(struct pessoa));
 
 
 	while (variavel_menu > 0)
@@ -71,7 +73,7 @@ int main()
 		{
 			printf("Quantas pessoas gostaria de adicionar?\n");
 			scanf("%d", &qtd_pessoas);
-			inserir_pessoas(&agenda[MAX], pessoas_existentes, qtd_pessoas);
+			inserir_pessoas(agenda, pessoas_existentes, qtd_pessoas);
 			pessoas_existentes += qtd_pessoas;
 			
 		}
@@ -81,23 +83,23 @@ int main()
 		}
 		else if (variavel_menu == 3) 
 		{
-			imprime_um_pouco(&agenda[MAX], pessoas_existentes);
+			imprime_um_pouco(agenda, pessoas_existentes);
 		}
 		else if (variavel_menu == 4) 
 		{
-			imprime_tudo(&agenda[MAX], pessoas_existentes);
+			imprime_tudo(agenda, pessoas_existentes);
 		}
 		else if (variavel_menu == 5) 
 		{
-			acha_pessoa(&agenda[MAX], pessoas_existentes);
+			acha_pessoa(agenda, pessoas_existentes);
 		}
 		else if (variavel_menu == 6) 
 		{
-			acha_niver(&agenda[MAX], pessoas_existentes);
+			acha_niver(agenda, pessoas_existentes);
 		}
 		else if (variavel_menu == 7) 
 		{
-			acha_niverdia(&agenda[MAX], pessoas_existentes);
+			acha_niverdia(agenda, pessoas_existentes);
 		}
 	}
 	
