@@ -55,6 +55,8 @@ int acha_niver(struct pessoa *agenda, int pessoas_existentes);
 
 int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
 
+int remover_pessoas(struct pessoa *agenda, int pessoas_existentes);
+
 
 int main() 
 {
@@ -79,7 +81,7 @@ int main()
 		}
 		else if (variavel_menu == 2) 
 		{
-			printf("\nCalma, ainda estamos implementando essa função :D\n");
+			remover_pessoas(agenda, pessoas_existentes);
 		}
 		else if (variavel_menu == 3) 
 		{
@@ -277,4 +279,48 @@ int acha_niverdia(struct pessoa *agenda, int pessoas_existentes)
 			
 	}
     return 0;
+}
+
+
+int remover_pessoas(struct pessoa *agenda, int pessoas_existentes) 
+{
+	int i, j, aux= 0;
+	char nome[40];
+
+	printf("Quem você gostaria de remover?");
+	scanf("\n%[A-Z a-z]s", nome);
+
+	for (j = 0; j < pessoas_existentes; j++) 
+	{
+		if (strcmp(nome,agenda[j].nome) == 0) 
+		{
+			for(i=j;i<pessoas_existentes;i++)
+			{
+				strcpy(agenda[i].nome, agenda[i+1].nome);
+				strcpy(agenda[i].email, agenda[i+1].email);
+				strcpy(agenda[i].ender.rua, agenda[i+1].ender.rua);
+				strcpy(agenda[i].ender.complemento, agenda[i+1].ender.complemento);
+				strcpy(agenda[i].ender.bairro, agenda[i+1].ender.bairro);
+				strcpy(agenda[i].ender.cidade, agenda[i+1].ender.cidade);
+				strcpy(agenda[i].ender.estado, agenda[i+1].ender.estado);
+				strcpy(agenda[i].ender.pais, agenda[i+1].ender.pais);
+				strcpy(agenda[i].comentario, agenda[i+1].comentario);
+				agenda[i].ender.numero = agenda[i+1].ender.numero;
+				agenda[i].ender.cep = agenda[i+1].ender.cep;
+				agenda[i].tel.cod_inter = agenda[i+1].tel.cod_inter;
+				agenda[i].tel.cod_area = agenda[i+1].tel.cod_area;
+				agenda[i].tel.numero = agenda[i+1].tel.numero;
+				agenda[i].data.dia = agenda[i+1].data.dia;
+				agenda[i].data.mes = agenda[i+1].data.mes;
+				agenda[i].data.ano = agenda[i+1].data.ano;
+			}
+			aux++;
+		}
+	}
+	if(aux==0)
+	{
+		printf("\nNenhuma pessoa deletada da agenda.\n");
+	}
+
+	return 0;
 }
