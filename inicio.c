@@ -55,7 +55,7 @@ int acha_niver(struct pessoa *agenda, int pessoas_existentes);
 
 int acha_niverdia(struct pessoa *agenda, int pessoas_existentes);
 
-int remover_pessoas(struct pessoa *agenda, int pessoas_existentes);
+int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes);
 
 
 int main() 
@@ -81,7 +81,7 @@ int main()
 		}
 		else if (variavel_menu == 2) 
 		{
-			remover_pessoas(agenda, pessoas_existentes);
+			remover_pessoas(agenda, &pessoas_existentes);
 		}
 		else if (variavel_menu == 3) 
 		{
@@ -282,7 +282,7 @@ int acha_niverdia(struct pessoa *agenda, int pessoas_existentes)
 }
 
 
-int remover_pessoas(struct pessoa *agenda, int pessoas_existentes) 
+int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes) 
 {
 	int i, j, aux= 0;
 	char nome[40];
@@ -290,11 +290,11 @@ int remover_pessoas(struct pessoa *agenda, int pessoas_existentes)
 	printf("Quem você gostaria de remover?");
 	scanf("\n%[A-Z a-z]s", nome);
 
-	for (j = 0; j < pessoas_existentes; j++) 
+	for (j = 0; j < *pessoas_existentes; j++) 
 	{
 		if (strcmp(nome,agenda[j].nome) == 0) 
 		{
-			for(i=j;i<pessoas_existentes;i++)
+			for(i=j;i<*pessoas_existentes;i++)
 			{
 				strcpy(agenda[i].nome, agenda[i+1].nome);
 				strcpy(agenda[i].email, agenda[i+1].email);
@@ -320,6 +320,10 @@ int remover_pessoas(struct pessoa *agenda, int pessoas_existentes)
 	if(aux==0)
 	{
 		printf("\nNenhuma pessoa deletada da agenda.\n");
+	}else
+	{
+		*pessoas_existentes = *pessoas_existentes-1;
+
 	}
 
 	return 0;
