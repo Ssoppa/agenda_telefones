@@ -1,0 +1,39 @@
+nome
+email
+rua
+111
+bairro
+cidade
+222
+estado
+pais
+complemento
+3 3 3
+4 4 4
+obsevacao
+Matheus Soppa Geremias
+suppersoppa@gmail.com
+Rua Arlindo Correa
+691
+Vila Nova
+Joinville
+89237387
+Santa Catarina
+Brasil
+Casa
+55 47 991411874
+20 11 1999
+Nenhuma
+Andre de Campos
+andredecampos@gmail.com
+Nao faco ideia
+666
+Xablau
+Joinville
+22
+Santa Catarina
+Brasil
+Casa
+55 47 11111111
+66 66 6666
+Sim
