@@ -63,6 +63,8 @@ int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes);
 
 int ler_arquivo(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo);
 
+int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo);
+
 
 int main() 
 {
@@ -83,7 +85,7 @@ int main()
 	while (variavel_menu > 0)
 	{
 		//Menu de opções
-		printf("\nOlá, sou sua agenda telefônica. O que gostaria de fazer? Digite a opção desejada\n[1] - Inserir pessoas por ordem alfábetica\n[2] - Retirar uma pessoa\n[3] - Mostrar todos os nomes, telefones e emails\n[4] - Mostrar todos os dados disponíveis\n[5] - Buscar com o primeiro nome\n[6] - Buscar por mês de aniversário\n[7] - Buscar por dia e mês de aniversário\n[0] - Fechar a agenda\n");
+		printf("\nOlá, sou sua agenda telefônica. O que gostaria de fazer? Digite a opção desejada\n[1] - Inserir pessoas por ordem alfábetica\n[2] - Retirar uma pessoa\n[3] - Mostrar todos os nomes, telefones e emails\n[4] - Mostrar todos os dados disponíveis\n[5] - Buscar com o primeiro nome\n[6] - Buscar por mês de aniversário\n[7] - Buscar por dia e mês de aniversário\n[8] - Gravar a agenda\n[0] - Fechar a agenda\n");
 		scanf("%d", &variavel_menu);
 
 		if (variavel_menu == 1) 
@@ -124,6 +126,11 @@ int main()
 		{
 			//Achar alguém pela sua data de nascimento
 			acha_niverdia(agenda, pessoas_existentes);
+		}
+		else if (variavel_menu == 8) 
+		{
+			//Achar alguém pela sua data de nascimento
+			grava_agenda(agenda, &pessoas_existentes, arquivo);
 		}
 	}
 
@@ -406,5 +413,62 @@ int ler_arquivo(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) {
 		i++;
     	*pessoas_existentes = *pessoas_existentes + 1;
     }
+    return 0;
+}
+
+int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) {
+	
+	int i, x = *pessoas_existentes;
+
+	arquivo = fopen("agenda.txt", "w");
+
+	//if ((arquivo = fopen("agenda.txt", "r")) != NULL) {
+		//apagar...................................................................
+	//}
+
+	if (arquivo == NULL)
+	{
+		printf( "Arquivo não pode ser aberto\n");
+	}
+	else {
+		for(i = 0; i < x; i++) 
+		{
+			fputs(agenda[i].nome, arquivo);
+			fputc('\n',arquivo);
+
+			fputs(agenda[i].email, arquivo);
+			fputc('\n',arquivo);
+
+			fputs(agenda[i].ender.rua, arquivo);
+			fputc('\n',arquivo);
+			fprintf(arquivo, "%d", agenda[i].ender.numero);
+			fputc('\n',arquivo);
+			fputs(agenda[i].ender.bairro, arquivo);
+			fputc('\n',arquivo);
+			fputs(agenda[i].ender.cidade, arquivo);
+			fputc('\n',arquivo);
+			fprintf(arquivo, "%d", agenda[i].ender.cep);
+			fputc('\n',arquivo);
+			fputs(agenda[i].ender.estado, arquivo);
+			fputc('\n',arquivo);
+			fputs(agenda[i].ender.pais, arquivo);
+			fputc('\n',arquivo);
+			fputs(agenda[i].ender.complemento, arquivo);
+			fputc('\n',arquivo);
+
+			fprintf(arquivo, "%d ", agenda[i].tel.cod_inter);
+			fprintf(arquivo, "%d ", agenda[i].tel.cod_area);
+			fprintf(arquivo, "%d", agenda[i].tel.numero);
+			fputc('\n',arquivo);
+
+			fprintf(arquivo, "%d ", agenda[i].data.dia);
+			fprintf(arquivo, "%d ", agenda[i].data.mes);
+			fprintf(arquivo, "%d", agenda[i].data.ano);
+			fputc('\n',arquivo);
+
+			fputs(agenda[i].comentario, arquivo);
+			fputc('\n',arquivo);
+		}
+	}	
     return 0;
 }
