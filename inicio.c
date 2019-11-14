@@ -136,6 +136,7 @@ int main()
 
 	//Mensagem de encerramento
 	printf("\n\nObrigado por usar nossa agenda, volte sempre.\n\n");
+	free(agenda);
 	return 0;
 
 }
@@ -381,7 +382,8 @@ int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes)
 	return 0;
 }
 
-int ler_arquivo(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) {
+int ler_arquivo(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) 
+{
 	
 	int i = 0;
 	while (!feof(arquivo)) {
@@ -417,24 +419,25 @@ int ler_arquivo(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) {
     return 0;
 }
 
-int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) {
+int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) 
+{
 	
 	int i, x = *pessoas_existentes;
-
-	arquivo = fopen("agenda.txt", "w");
 
 	if ((arquivo = fopen("agenda.txt", "r")) != NULL) 
 	{
 		//Apaga o arquivo para nõ duplicar a agenda
-		int remove(const char *arquivo);//
+		int remove(const char *arquivo);
 	}
+
+	arquivo = fopen("agenda.txt", "w");
 
 	if (arquivo == NULL)
 	{
-		printf( "Arquivo não pode ser aberto\n");
+		printf( "\nArquivo não pode ser aberto\n");
 	}
 	else {
-		for(i = 0; i < x; i++) 
+		for(i = 0; i < x-1; i++) 
 		{
 			fputs(agenda[i].nome, arquivo);
 			fputc('\n',arquivo);
@@ -472,6 +475,42 @@ int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) 
 			fputs(agenda[i].comentario, arquivo);
 			fputc('\n',arquivo);
 		}
+		fputs(agenda[x-1].nome, arquivo);
+		fputc('\n',arquivo);
+
+		fputs(agenda[x-1].email, arquivo);
+		fputc('\n',arquivo);
+
+		fputs(agenda[x-1].ender.rua, arquivo);
+		fputc('\n',arquivo);
+		fprintf(arquivo, "%d", agenda[x-1].ender.numero);
+		fputc('\n',arquivo);
+		fputs(agenda[x-1].ender.bairro, arquivo);
+		fputc('\n',arquivo);
+		fputs(agenda[x-1].ender.cidade, arquivo);
+		fputc('\n',arquivo);
+		fprintf(arquivo, "%d", agenda[x-1].ender.cep);
+		fputc('\n',arquivo);
+		fputs(agenda[x-1].ender.estado, arquivo);
+		fputc('\n',arquivo);
+		fputs(agenda[x-1].ender.pais, arquivo);
+		fputc('\n',arquivo);
+		fputs(agenda[x-1].ender.complemento, arquivo);
+		fputc('\n',arquivo);
+
+		fprintf(arquivo, "%d ", agenda[x-1].tel.cod_inter);
+		fprintf(arquivo, "%d ", agenda[x-1].tel.cod_area);
+		fprintf(arquivo, "%d", agenda[x-1].tel.numero);
+		fputc('\n',arquivo);
+
+		fprintf(arquivo, "%d ", agenda[x-1].data.dia);
+		fprintf(arquivo, "%d ", agenda[x-1].data.mes);
+		fprintf(arquivo, "%d", agenda[x-1].data.ano);
+		fputc('\n',arquivo);
+
+		fputs(agenda[x-1].comentario, arquivo);
+
+		printf("\nAgenda Gravada com sucesso\n");
 	}	
     return 0;
 }
