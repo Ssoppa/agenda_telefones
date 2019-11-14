@@ -129,7 +129,7 @@ int main()
 		}
 		else if (variavel_menu == 8) 
 		{
-			//Achar alguém pela sua data de nascimento
+			//Grava as informações no arquivo agenda.txt, sobreescrevendo as antigas
 			grava_agenda(agenda, &pessoas_existentes, arquivo);
 		}
 	}
@@ -343,9 +343,10 @@ int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes)
 
 	for (j = 0; j < *pessoas_existentes; j++) 
 	{
-		if (strcmp(nome,agenda[j].nome) == 0) 
+		if (strcmp(nome,agenda[j].nome) == 0) //Busca pelas pessoas da agenda
 		{
-			for(i=j;i<*pessoas_existentes;i++)
+			//Apartir do momento que encontra substitui o atual pelo próximo nome da agenda, e repete até o último
+			for(i=j;i<*pessoas_existentes;i++) 
 			{
 				strcpy(agenda[i].nome, agenda[i+1].nome);
 				strcpy(agenda[i].email, agenda[i+1].email);
@@ -365,10 +366,10 @@ int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes)
 				agenda[i].data.mes = agenda[i+1].data.mes;
 				agenda[i].data.ano = agenda[i+1].data.ano;
 			}
-			aux++;
+			aux++;//Se alguem é deletado da agenta aux aumenta
 		}
 	}
-	if(aux==0)
+	if(aux==0)//se aux não aumentou o odigo avisa o usuario
 	{
 		printf("\nNenhuma pessoa deletada da agenda.\n");
 	}else
@@ -422,9 +423,11 @@ int grava_agenda(struct pessoa *agenda, int *pessoas_existentes, FILE *arquivo) 
 
 	arquivo = fopen("agenda.txt", "w");
 
-	//if ((arquivo = fopen("agenda.txt", "r")) != NULL) {
-		//apagar...................................................................
-	//}
+	if ((arquivo = fopen("agenda.txt", "r")) != NULL) 
+	{
+		//Apaga o arquivo para nõ duplicar a agenda
+		int remove(const char *arquivo);//
+	}
 
 	if (arquivo == NULL)
 	{
