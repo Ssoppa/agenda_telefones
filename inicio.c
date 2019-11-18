@@ -148,7 +148,7 @@ int inserir_pessoas(struct pessoa *agenda, int pessoas_existentes, int qtd_pesso
 	for (i = pessoas_existentes, aux = 0; aux < qtd_pessoas; i++, aux++) 
 	{
 		//Basicamente, começar do zero e aumentar até a quantidade de pessoas que o usuário especificou, começando pela quantidade de pessoas existentes
-		printf("Por favor, insira os dados requisitados.\n");
+		printf("Por favor, insira os dados requisitados. (Lembrando que as pessoas devem ser inseridas em ordem alfábetica)\n");
 
 		//Início dos inputs
 		printf("Digite seu nome: ");
@@ -370,7 +370,7 @@ int remover_pessoas(struct pessoa *agenda, int *pessoas_existentes)
 			aux++;//Se alguem é deletado da agenta aux aumenta
 		}
 	}
-	if(aux==0)//se aux não aumentou o odigo avisa o usuario
+	if(aux==0)//se aux não aumentou o código avisa o usuario
 	{
 		printf("\nNenhuma pessoa deletada da agenda.\n");
 	}else
